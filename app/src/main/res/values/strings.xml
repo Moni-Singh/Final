@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Final</string>
+    <string name="nav_close">close</string>
+    <string name="nav_open">open</string>
+    <string name="nav_header_desc" />
+    <string name="nav_header_title" />
+    <string name="nav_header_subtitle" />
+    <string name="menu_home" />
+    <string name="menu_gallery" />
+</resources>
