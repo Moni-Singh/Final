@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-
-    <RelativeLayout
+    android:layout_marginTop="@dimen/_4sdp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="start"
+    android:gravity="start">
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_5sdp"
-        android:background="@drawable/messagereceivebox">
+        android:layout_marginStart="@dimen/_8sdp"
+        app:cardBackgroundColor="@color/purple_500"
+        app:cardCornerRadius="@dimen/_32sdp">
 
         <TextView
             android:id="@+id/tvreceivemessage"
             android:layout_width="wrap_content"
-            android:padding="@dimen/_10sdp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_15sdp"
-            android:text="This is moni"
-            />
-
-    </RelativeLayout>
+            android:paddingLeft="@dimen/_8sdp"
+            android:paddingRight="@dimen/_8sdp"
+            android:text="This is chudail"
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_2sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp" />
+    </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>

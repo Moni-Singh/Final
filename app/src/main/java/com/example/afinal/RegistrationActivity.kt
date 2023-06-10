@@ -1,10 +1,12 @@
 package com.example.afinal
 
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afinal.Model.User
@@ -14,6 +16,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import com.makeramen.roundedimageview.RoundedImageView
+import de.hdodenhof.circleimageview.CircleImageView
 
 
 class RegistrationActivity : AppCompatActivity() {
@@ -25,8 +29,10 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var emailreg: EditText
     private lateinit var btnReg: Button
     private lateinit var rgisetrbtn: Button
+    private lateinit var userImage: CircleImageView
     private lateinit var mDBRef:DatabaseReference
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
@@ -37,6 +43,7 @@ class RegistrationActivity : AppCompatActivity() {
         username = findViewById(R.id.regusername)
         emailreg = findViewById(R.id.regEmail)
         etPass = findViewById(R.id.loginPassword)
+
         btnReg = findViewById(R.id.btnRegister) as Button
         rgisetrbtn = findViewById(R.id.rgisetrbtn) as Button
         rgisetrbtn.setOnClickListener {
@@ -51,17 +58,17 @@ class RegistrationActivity : AppCompatActivity() {
             val email = emailreg.text.toString()
             val password = etPass.text.toString()
 
-            registerUser(name,email, password)
+            registerUser(name,email, password,image = "")
         }
 
     }
 
-    private fun registerUser(name:String,email: String, password: String) {
+    private fun registerUser(name:String,email: String, password: String,image: String) {
 
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) {
 
             if (it.isSuccessful) {
-                addUserToDatabase(name,email,auth.currentUser?.uid!!)
+                addUserToDatabase(name,email,image,auth.currentUser?.uid!!)
                 startActivity(Intent(applicationContext, DashBoardActivity::class.java))
                 finish()
             } else {
@@ -72,9 +79,9 @@ class RegistrationActivity : AppCompatActivity() {
 
     }
 
-    private fun addUserToDatabase(name: String, email: String, uid: String) {
+    private fun addUserToDatabase(name: String, email: String,image:String, uid: String) {
        mDBRef = FirebaseDatabase.getInstance().getReference()
-        mDBRef.child("User").child(uid).setValue(User(name,email,uid))
+        mDBRef.child("User").child(uid).setValue(User(name,email,uid,image))
 
 
     }

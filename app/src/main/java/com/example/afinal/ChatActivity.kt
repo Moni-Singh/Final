@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Message
+import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.afinal.Model.Messagechat
@@ -30,7 +32,9 @@ class ChatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
-
+        val window = this.window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.chatcolor)
         val name = intent.getStringExtra("name")
         val receiveruid = intent.getStringExtra("uid")
         val senderuid = FirebaseAuth.getInstance().currentUser?.uid
@@ -49,7 +53,12 @@ class ChatActivity : AppCompatActivity() {
         messageRecyclerView.layoutManager = LinearLayoutManager(this)
         messageRecyclerView.adapter = messageAdapter
 
-
+        val llm = LinearLayoutManager(this)
+        llm.stackFromEnd = true     // items gravity sticks to bottom
+        llm.reverseLayout = false   // item list sorting (new messages start from the bottom)
+        messageRecyclerView!!.layoutManager = llm
+        messageRecyclerView!!.scrollToPosition(messageList.size -1)
+        messageAdapter!!.notifyDataSetChanged()
         //adding data to recycleview
         mDbRef = FirebaseDatabase.getInstance().reference
         mDbRef.child("Chats").child(senderRoom!!).child("messages")

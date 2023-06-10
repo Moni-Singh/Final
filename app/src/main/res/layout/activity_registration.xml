@@ -14,24 +14,23 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/shapeableImageView2"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
             app:layout_constraintCircleRadius="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
-            <ImageView
-                android:id="@+id/statusUser"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/coco"
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="403dp"
+                android:layout_height="307dp"
+                android:gravity="center"
+                android:src="@drawable/mobile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
 
             <TextView
                 android:id="@+id/textView5"
@@ -102,6 +101,7 @@
                     android:id="@+id/regEmail"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:drawableStart="@drawable/ic_email_24"
                     android:drawablePadding="15dp"
                     android:drawableTint="@color/black"
                     android:imeOptions="actionNext"
@@ -144,11 +144,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:backgroundTint="@color/purple_500"
+                android:backgroundTint="@color/chatcolor"
                 android:gravity="center"
                 android:padding="@dimen/_10sdp"
                 android:text="Register"
-                android:textColor="@color/black"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
                 android:textFontWeight="600"
                 android:textSize="@dimen/_12sdp"
                 app:cornerRadius="@dimen/_14sdp"
@@ -158,13 +159,14 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/rgisetrbtn"
-                style="@style/ThemeOverlay.Material3.Button.ElevatedButton"
+                style="@style/ThemeOverlay.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/white"
                 android:gravity="center"
                 android:padding="@dimen/_10sdp"
+                android:textAllCaps="false"
                 android:text="Already have account login here!"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp"

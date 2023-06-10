@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_4sdp"
+    android:gravity="end"
+    android:layout_gravity="end">
 
-
-    <RelativeLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:background="@drawable/messagebox_background">
+        app:cardBackgroundColor="@color/purple_500"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:cardCornerRadius="@dimen/_32sdp">
 
         <TextView
             android:id="@+id/tvsendmessage"
             android:layout_width="wrap_content"
-            android:padding="@dimen/_10sdp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_15sdp"
+            android:paddingLeft="@dimen/_8sdp"
+            android:paddingRight="@dimen/_8sdp"
             android:text="This is moni"
-            />
 
-    </RelativeLayout>
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_2sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp" />
+    </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>

@@ -1,15 +1,17 @@
 package com.example.afinal
 
 
-import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
 
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -26,7 +28,9 @@ class LoginActivity : AppCompatActivity() {
 
         email = findViewById(R.id.loginEmail)
         password = findViewById(R.id.loginPassword)
-
+        val window = this.window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.chatcolor)
         sharedPreferences = getSharedPreferences("shared_Preference", MODE_PRIVATE)
         val isLogin = sharedPreferences.getBoolean("isLogin", false)
 
@@ -47,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        val btnregistpage: Button = findViewById(R.id.rgisetruserbtn)
+        val btnregistpage: TextView = findViewById(R.id.rgisetruserbtn)
         btnregistpage.setOnClickListener {
             val intent = Intent(this@LoginActivity, RegistrationActivity::class.java)
             finish()
@@ -59,11 +63,17 @@ class LoginActivity : AppCompatActivity() {
 
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener (this) {
             if (it.isSuccessful) {
+
+                val editor = sharedPreferences.edit()
+                editor.putString("email",email)
+                editor.putString("password",password)
+                editor.putBoolean("isLogin",true)
+                editor.apply()
                 val intent = Intent(applicationContext, DashBoardActivity::class.java)
                 startActivity(intent)
             } else {
 
-                Toast.makeText(this@LoginActivity,"Unseuccessful",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity,"Failed",Toast.LENGTH_SHORT).show()
             }
 
         }

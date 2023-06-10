@@ -14,12 +14,15 @@ import com.example.afinal.Model.User
 import com.example.afinal.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
+import de.hdodenhof.circleimageview.CircleImageView
 
-class UserAdapter(val context: Context, val userlist:ArrayList<User>):RecyclerView.Adapter<UserAdapter.UserViewHolder> (){
+class UserAdapter(val context: Context):RecyclerView.Adapter<UserAdapter.UserViewHolder> (){
+    val userlist:ArrayList<User> =  ArrayList<User>()
 
     class UserViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         val textName = itemView.findViewById<TextView>(R.id.text_name)
-
+        val emailAddress = itemView.findViewById<TextView>(R.id.textView3)
 
     }
 
@@ -31,18 +34,26 @@ class UserAdapter(val context: Context, val userlist:ArrayList<User>):RecyclerVi
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val currentUser  = userlist[position]
-
         holder.textName.text = currentUser.name
-
+        holder.emailAddress.text = currentUser.email
         holder.itemView.setOnClickListener{
             val i = Intent(context,ChatActivity::class.java)
-            //send some infrormation from one activity to another
+            //send some information from one activity to another
             i.putExtra("name",currentUser.name)
             i.putExtra("uid",currentUser.uid)
-
             context.startActivity(i)
         }
+    }
 
+    fun setUserList(data:List<User>){
+        userlist.clear()
+        userlist.addAll(data)
+        notifyDataSetChanged()
+    }
+
+    fun addUser(user:User){
+        userlist.add(user)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {

@@ -14,25 +14,15 @@
         tools:targetApi="31">
         <activity
             android:name=".ChatActivity"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity"
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".AddActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Roomdatabase"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
+
         <activity
             android:name=".Splashscreen"
             android:exported="false">

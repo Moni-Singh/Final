@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_above="@+id/chatTypeLl"
         android:layout_height="wrap_content"
-      android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true" />
 
 
     <LinearLayout
@@ -22,25 +22,35 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
         android:orientation="horizontal"
-        android:weightSum="100">
+        android:weightSum="100"
+        android:paddingBottom="@dimen/_3sdp">
 
+        <LinearLayout
+            android:layout_width="331dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_1sdp"
+            android:background="@drawable/messagereceivebox"
+            android:paddingTop="@dimen/_15sdp"
+            >
 
-        <EditText
-            android:id="@+id/edtmessagebox"
-            android:layout_width="450dp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_weight="100"
-            android:background="@drawable/messagebox_background"
-            android:hint="Enter Your Message"
+            <EditText
+                android:id="@+id/edtmessagebox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_weight="90"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:hint="Enter Your Message"
 
-            />
+                />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/ivsendmessage"
-            android:layout_width="@dimen/_40sdp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:background = "@drawable/ic_baseline_send_24"
-            android:layout_weight="20"/>
+            android:layout_weight="20"
+            android:background="@drawable/ic_baseline_send_24" />
 
 
     </LinearLayout>

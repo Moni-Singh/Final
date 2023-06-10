@@ -14,24 +14,23 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/shapeableImageView2"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_60sdp"
             app:layout_constraintCircleRadius="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
 
-            <ImageView
-                android:id="@+id/statusUser"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/coco"
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="415dp"
+                android:layout_height="307dp"
+                android:gravity="center"
+                android:src="@drawable/giflogin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -118,11 +117,12 @@
                 style="@style/ThemeOverlay.Material3.Button.ElevatedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/purple_500"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/chatcolor"
                 android:gravity="center"
                 android:padding="@dimen/_10sdp"
                 android:text="Login"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textFontWeight="600"
                 android:textSize="@dimen/_12sdp"
                 app:cornerRadius="@dimen/_14sdp"
@@ -143,18 +143,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
-            <com.google.android.material.button.MaterialButton
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/rgisetruserbtn"
-                style="@style/ThemeOverlay.Material3.Button.ElevatedButton"
+                style="@style/ThemeOverlay.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 android:gravity="center"
                 android:padding="@dimen/_10sdp"
                 android:text="Do not have account register here"
+                android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp"
                 app:cornerRadius="@dimen/_14sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
