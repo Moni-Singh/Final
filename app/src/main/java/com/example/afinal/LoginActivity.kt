@@ -1,8 +1,10 @@
 package com.example.afinal
 
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.drawable.ColorDrawable
 
 import android.os.Bundle
 import android.view.WindowManager
@@ -26,6 +28,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        supportActionBar?.setDisplayShowTitleEnabled(true)
+        supportActionBar?.title = "Login"
+
+        supportActionBar!!.setBackgroundDrawable(
+            ColorDrawable(
+                ContextCompat.getColor(this, R.color.chatcolor)
+            )
+        )
         email = findViewById(R.id.loginEmail)
         password = findViewById(R.id.loginPassword)
         val window = this.window
@@ -46,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
 
             val email = email.text.toString()
             val password = password.text.toString()
-            login(email,password)
+            login(email, password)
         }
 
         auth = FirebaseAuth.getInstance()
@@ -59,23 +69,52 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun isPasswordValid(password: String): Boolean {
+        val passwordRegex =
+            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\S+\$).{8,}\$"
+        return password.matches(passwordRegex.toRegex())
+    }
+
     private fun login(email: String, password: String) {
+        if (email.isBlank()) {
+            Toast.makeText(this, "Email should not be blank", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener (this) {
-            if (it.isSuccessful) {
+        if (!isPasswordValid(password)) {
+            Toast.makeText(
+                this,
+                "Password must contain at least one digit, one lowercase letter, one uppercase letter, one special character, and be at least 8 characters long.",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
 
-                val editor = sharedPreferences.edit()
-                editor.putString("email",email)
-                editor.putString("password",password)
-                editor.putBoolean("isLogin",true)
-                editor.apply()
-                val intent = Intent(applicationContext, DashBoardActivity::class.java)
-                startActivity(intent)
-            } else {
+        val progressDialog = ProgressDialog(this@LoginActivity)
+        progressDialog.setTitle("Loading")
+        progressDialog.setMessage("Please wait")
+        progressDialog.show()
 
-                Toast.makeText(this@LoginActivity,"Failed",Toast.LENGTH_SHORT).show()
+
+        if (InternetConnection.isNetworkAvailable(this@LoginActivity)) {
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) {
+                if (it.isSuccessful) {
+
+                    val editor = sharedPreferences.edit()
+                    editor.putString("email", email)
+                    editor.putString("password", password)
+                    editor.putBoolean("isLogin", true)
+                    editor.apply()
+                    val intent = Intent(applicationContext, DashBoardActivity::class.java)
+                    startActivity(intent)
+                    progressDialog.dismiss()
+                } else {
+
+                    Toast.makeText(this@LoginActivity, "Failed", Toast.LENGTH_SHORT).show()
+                    progressDialog.dismiss()
+                }
+
             }
-
         }
     }
 }

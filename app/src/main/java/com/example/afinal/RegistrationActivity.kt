@@ -3,12 +3,16 @@ package com.example.afinal
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Patterns
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.afinal.Model.User
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
@@ -29,7 +33,6 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var emailreg: EditText
     private lateinit var btnReg: Button
     private lateinit var rgisetrbtn: Button
-    private lateinit var userImage: CircleImageView
     private lateinit var mDBRef:DatabaseReference
 
     @SuppressLint("MissingInflatedId")
@@ -37,6 +40,17 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
+        supportActionBar?.setDisplayShowTitleEnabled(true)
+        supportActionBar?.title = "Registration"
+
+
+        val window = this.window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.chatcolor)
+        supportActionBar!!.setBackgroundDrawable(
+            ColorDrawable(
+                ContextCompat.getColor(this, R.color.chatcolor))
+        )
 
         auth = Firebase.auth
 
@@ -54,37 +68,64 @@ class RegistrationActivity : AppCompatActivity() {
 
 
         btnReg.setOnClickListener {
-            val name = username.text.toString()
-            val email = emailreg.text.toString()
-            val password = etPass.text.toString()
+            if (InternetConnection.isNetworkAvailable(this@RegistrationActivity)) {
+                val name = username.text.toString()
+                val email = emailreg.text.toString()
+                val password = etPass.text.toString()
 
-            registerUser(name,email, password,image = "")
+                registerUser(name, email, password, image = "")
+            }
         }
+    }
 
+    private fun isPasswordValid(password: String): Boolean {
+        val passwordRegex =
+            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\S+\$).{8,}\$"
+        return password.matches(passwordRegex.toRegex())
     }
 
     private fun registerUser(name:String,email: String, password: String,image: String) {
 
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) {
 
-            if (it.isSuccessful) {
-                addUserToDatabase(name,email,image,auth.currentUser?.uid!!)
-                startActivity(Intent(applicationContext, DashBoardActivity::class.java))
-                finish()
-            } else {
+        if (email.isBlank() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Email should not be blank", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-                Toast.makeText(this@RegistrationActivity,"Unseuccessful",Toast.LENGTH_SHORT).show()
+        if (name.isBlank()) {
+            Toast.makeText(this, "Name  should not be blank", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (!isPasswordValid(password)) {
+            Toast.makeText(
+                this,
+                "Password must contain at least one digit, one lowercase letter, one uppercase letter, one special character, and be at least 8 characters long.",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) {
+
+                if (it.isSuccessful) {
+                    addUserToDatabase(name, email, image, auth.currentUser?.uid!!)
+                    startActivity(Intent(applicationContext, LoginActivity::class.java))
+                    finish()
+                } else {
+
+                    Toast.makeText(this@RegistrationActivity, "Unsuccessful", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
+
+        }
+
+        private fun addUserToDatabase(name: String, email: String, image: String, uid: String) {
+            mDBRef = FirebaseDatabase.getInstance().getReference()
+            mDBRef.child("User").child(uid).setValue(User(name, email, uid, image))
+
+
         }
 
     }
-
-    private fun addUserToDatabase(name: String, email: String,image:String, uid: String) {
-       mDBRef = FirebaseDatabase.getInstance().getReference()
-        mDBRef.child("User").child(uid).setValue(User(name,email,uid,image))
-
-
-    }
-
-
-}

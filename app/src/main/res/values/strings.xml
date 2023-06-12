@@ -7,4 +7,18 @@
     <string name="nav_header_subtitle" />
     <string name="menu_home" />
     <string name="menu_gallery" />
+
+
+
+
+<!--    For Progress-->
+
+    <style name="ProgressDialogStyle" parent="android:Theme.Holo.Light.Dialog">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_centerInParent">true</item>
+        <!--<item name="android:indeterminateTint">@color/colorGreen</item>-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 </resources>

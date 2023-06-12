@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.afinal"
-        minSdk 22
+        minSdk 21
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -58,9 +58,11 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
 
 
-
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
     //GIF
+
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+
 
 //For rounded image
     implementation 'com.makeramen:roundedimageview:2.3.0'

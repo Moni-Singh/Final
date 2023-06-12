@@ -5,11 +5,13 @@
     android:layout_marginTop="@dimen/_4sdp"
     android:layout_height="wrap_content"
     android:layout_gravity="start"
-    android:gravity="start">
+    android:gravity="start"
+    android:paddingBottom="@dimen/_10sdp">
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
+        android:background="@drawable/usersender"
         app:cardBackgroundColor="@color/purple_500"
         app:cardCornerRadius="@dimen/_32sdp">
 
