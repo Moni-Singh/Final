@@ -5,12 +5,14 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/_4sdp"
     android:gravity="end"
+     android:paddingBottom="@dimen/_10sdp"
     android:layout_gravity="end">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/purple_500"
+        android:background="@drawable/usersendmessage"
         android:layout_marginEnd="@dimen/_8sdp"
         app:cardCornerRadius="@dimen/_32sdp">
 

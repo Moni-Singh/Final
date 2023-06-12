@@ -62,7 +62,7 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="@dimen/_20sdp"
-                android:hint="Username"
+                android:hint="Email"
                 app:boxStrokeColor="@color/purple_500"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/purple_500"
@@ -143,7 +143,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/rgisetruserbtn"
                 style="@style/ThemeOverlay.Material3.Button.TextButton"
                 android:layout_width="wrap_content"

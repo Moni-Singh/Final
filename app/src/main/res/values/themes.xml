@@ -21,6 +21,7 @@
         <item name="colorPrimary">@color/chatcolor</item>
         <item name="colorPrimaryDark">@color/chatcolor</item>
         <item name="colorAccent">@color/chatcolor</item>
+
     </style>
 
 </resources>

@@ -19,8 +19,8 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/userImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginStart="@dimen/_10sdp"
             app:cardBackgroundColor="@color/purple_500"
             app:cardCornerRadius="@dimen/_50ssp"
@@ -30,12 +30,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_person_24"
-                android:tint="@color/white" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/UserImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:src="@drawable/coco"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="1dp" />
 
         </com.google.android.material.card.MaterialCardView>
 

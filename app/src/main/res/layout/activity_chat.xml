@@ -19,28 +19,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
         android:orientation="horizontal"
-        android:weightSum="100"
-        android:paddingBottom="@dimen/_3sdp">
+        android:paddingBottom="@dimen/_3sdp"
+        android:weightSum="100">
 
         <LinearLayout
-            android:layout_width="331dp"
+            android:layout_width="321dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_20sdp"
             android:background="@drawable/messagereceivebox"
-            android:paddingTop="@dimen/_15sdp"
-            >
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_3sdp">
 
             <EditText
                 android:id="@+id/edtmessagebox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
                 android:layout_weight="90"
-                android:layout_marginEnd="@dimen/_5sdp"
+                android:background="@android:color/transparent"
                 android:hint="Enter Your Message"
+                android:padding="@dimen/_5sdp"
 
                 />
         </LinearLayout>
@@ -49,8 +52,9 @@
             android:id="@+id/ivsendmessage"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:layout_weight="20"
-            android:background="@drawable/ic_baseline_send_24" />
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_weight="1"
+            android:background="@drawable/send" />
 
 
     </LinearLayout>

@@ -6,11 +6,17 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 
 import android.view.WindowManager
+import androidx.core.content.ContextCompat
 
 class Splashscreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splashscreen)
+
+
+        val window = this.window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.chatcolor)
 
 
         window.setFlags(
