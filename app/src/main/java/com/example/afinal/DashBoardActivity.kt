@@ -2,6 +2,9 @@ package com.example.afinal
 
 import android.app.Activity
 import android.app.Dialog
+import android.app.SearchManager
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentFilter
@@ -17,10 +20,12 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,13 +47,10 @@ class DashBoardActivity : AppCompatActivity() {
     private lateinit var  userImage:ImageView
     private lateinit var  submitButton:Button
     private lateinit var  cancelButton:Button
-    private  var  progressBar:ProgressBar? = null
     private lateinit var storageRef: StorageReference
-
-
     lateinit var receiver :AirPlaneModeChangeReceiver
     private lateinit var mDbRef:DatabaseReference
-    private var imageUrl: String = ""
+
 
 
 
@@ -90,7 +92,8 @@ class DashBoardActivity : AppCompatActivity() {
 
         mDbRef.child("User").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                //for clearing user list
+
+
                 for(postSnapshot in snapshot.children){
                     val currentUser = postSnapshot.getValue(User::class.java)
                     //for hiding the current logign user
@@ -109,8 +112,49 @@ class DashBoardActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu,menu)
+
+        val manager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchItem = menu!!.findItem(R.id.search)
+
+        if(searchItem?.actionView is SearchView){
+        val searchView = searchItem!!.actionView as SearchView
+
+        searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                searchView.setQuery("", false)
+                searchItem.collapseActionView()
+                Toast.makeText(this@DashBoardActivity, "looking for$query", Toast.LENGTH_SHORT)
+                    .show()
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                performSearch(newText)
+              return true
+            }
+        })}
+
         return super.onCreateOptionsMenu(menu)
     }
+
+    private fun performSearch(query: String?) {
+        val filteredList = ArrayList<User>()
+
+        if (!query.isNullOrBlank()) {
+            for (user in userlist) {
+                if (user.name!!.contains(query, ignoreCase = true)) {
+                    filteredList.add(user)
+                }
+            }
+        } else {
+            filteredList.addAll(userlist)
+        }
+        userAdapter.setUserList(filteredList!!)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         if(item.itemId == R.id.uploadImage){
@@ -205,6 +249,7 @@ class DashBoardActivity : AppCompatActivity() {
                                         ).show()
 
                                         dialog.dismiss()
+                                        userAdapter.notifyDataSetChanged()
                                     } else {
                                         Toast.makeText(
                                             this@DashBoardActivity,
@@ -245,7 +290,14 @@ class DashBoardActivity : AppCompatActivity() {
             finish()
             return true
         }
+
+
+
         return  false
+    }
+
+    private fun perfromSearch() {
+        TODO("Not yet implemented")
     }
 
 
@@ -284,7 +336,7 @@ class DashBoardActivity : AppCompatActivity() {
             } else if (requestCode == 1) {
                 val imageUri = data?.data
                 userImage.setImageURI(imageUri)
-                println("imaehmdih:$userImage")
+                println("imageUrl:$userImage")
             }
         }
     }

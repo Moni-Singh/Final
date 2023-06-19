@@ -4,6 +4,7 @@ class Messagechat {
 
     var message:String? =  null
     var senderId:String? = null
+    var key: String = ""
 
     constructor(){}
 

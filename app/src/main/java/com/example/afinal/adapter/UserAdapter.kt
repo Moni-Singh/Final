@@ -55,6 +55,7 @@ class UserAdapter(val context: Context):RecyclerView.Adapter<UserAdapter.UserVie
 
 
             context.startActivity(i)
+
         }
     }
 

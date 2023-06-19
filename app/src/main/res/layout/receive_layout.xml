@@ -6,21 +6,21 @@
     android:layout_height="wrap_content"
     android:layout_gravity="start"
     android:gravity="start"
+    android:layout_marginEnd="@dimen/_50sdp"
     android:paddingBottom="@dimen/_10sdp">
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
-        android:background="@drawable/usersender"
-        app:cardBackgroundColor="@color/purple_500"
-        app:cardCornerRadius="@dimen/_32sdp">
+        app:cardBackgroundColor="@color/chatsendmessage"
+        app:cardCornerRadius="@dimen/_8sdp">
 
         <TextView
             android:id="@+id/tvreceivemessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/_8sdp"
-            android:paddingRight="@dimen/_8sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingRight="@dimen/_10sdp"
             android:text="This is chudail"
             android:paddingTop="@dimen/_2sdp"
             android:paddingBottom="@dimen/_2sdp"

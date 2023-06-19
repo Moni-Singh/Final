@@ -5,25 +5,25 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/_4sdp"
     android:gravity="end"
+    android:layout_marginStart="@dimen/_50sdp"
      android:paddingBottom="@dimen/_10sdp"
     android:layout_gravity="end">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/purple_500"
+        app:cardBackgroundColor="@color/chatreceivemessage"
         android:background="@drawable/usersendmessage"
         android:layout_marginEnd="@dimen/_8sdp"
-        app:cardCornerRadius="@dimen/_32sdp">
+        app:cardCornerRadius="@dimen/_8sdp">
 
         <TextView
             android:id="@+id/tvsendmessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/_8sdp"
-            android:paddingRight="@dimen/_8sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingRight="@dimen/_10sdp"
             android:text="This is moni"
-
             android:paddingTop="@dimen/_2sdp"
             android:paddingBottom="@dimen/_2sdp"
             android:textColor="@color/white"

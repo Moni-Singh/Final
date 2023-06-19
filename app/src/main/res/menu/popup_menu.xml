@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Reply"
+        android:title="Reply"
+        android:icon="@drawable/chatmsgreply"
+        />
+    <item
+        android:id="@+id/Forward"
+        android:title="Forward"
+        android:icon="@drawable/chatmsgforward"/>
+    <item
+        android:id="@+id/Copy"
+        android:title="Copy"
+        android:icon="@drawable/chatcopy"/>
+    <item
+        android:id="@+id/Delete"
+        android:title="Delete"
+        android:icon="@drawable/ic_baseline_delete_24"/>
+
+</menu>

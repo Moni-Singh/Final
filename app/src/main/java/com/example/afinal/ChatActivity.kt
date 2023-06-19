@@ -1,21 +1,26 @@
 package com.example.afinal
 
 import android.annotation.SuppressLint
+import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Message
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.os.Build
+
 import android.view.LayoutInflater
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.afinal.Model.Messagechat
 import com.example.afinal.adapter.MessageAdapter
 import com.google.firebase.auth.FirebaseAuth
@@ -23,7 +28,8 @@ import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 
 
-class ChatActivity : AppCompatActivity() {
+
+class ChatActivity : AppCompatActivity(),MessageAdapter.OnClickSelectMessage {
 
     private lateinit var messageRecyclerView: RecyclerView
     private lateinit var messagebox: EditText
@@ -80,7 +86,7 @@ class ChatActivity : AppCompatActivity() {
         sendButton = findViewById<ImageView>(R.id.ivsendmessage)
 
         messageList = ArrayList()
-        messageAdapter = MessageAdapter(this,messageList)
+        messageAdapter = MessageAdapter(this,messageList,this)
         messageRecyclerView.layoutManager = LinearLayoutManager(this)
         messageRecyclerView.adapter = messageAdapter
 
@@ -99,6 +105,7 @@ class ChatActivity : AppCompatActivity() {
                         messageList.clear()
                     for (postSnapshot in snapshot.children) {
                         val message = postSnapshot.getValue(Messagechat::class.java)
+                        message?.key = postSnapshot.key ?: ""
                         messageList.add(message!!)
                     }
                     messageAdapter.notifyDataSetChanged()
@@ -126,8 +133,113 @@ class ChatActivity : AppCompatActivity() {
             }
         }
 
+    }
 
 
+    @RequiresApi(Build.VERSION_CODES.Q)
+    override fun selectSendmessage(messagelist: Messagechat) {
+        val selectedMessage = messagelist.message
+        println("message $selectedMessage")
+
+        val popupMenu = PopupMenu(this, findViewById<TextView>(R.id.tvsendmessage))
+        popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
+        popupMenu.setForceShowIcon(true)
+
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.Reply -> {
+                    true
+                }
+                R.id.Forward -> {
+
+                    true
+                }
+                R.id.Copy -> {
+                    val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    val clipData = ClipData.newPlainText("Message", selectedMessage)
+                    clipboardManager.setPrimaryClip(clipData)
+
+                    true
+                }
+                R.id.Delete -> {
+                    val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+                    val messageRef: DatabaseReference = database.getReference("Chats")
+                        .child(senderRoom!!)
+                        .child("messages")
+                        .child(messagelist.key)
+
+                    messageRef.removeValue()
+                        .addOnSuccessListener {
+                            println("Message deleted successfully")
+                            //Rrmoving message from local list
+                            messageList.remove(messagelist)
+                            messageAdapter.notifyDataSetChanged()
+                        }
+                        .addOnFailureListener { exception ->
+                            println("Failed to delete message: ${exception.message}")
+                        }
+
+                    true
+                }
+                else -> false
+            }
+        }
+
+        popupMenu.show()
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    override fun selectReceivemessage(messagelist: Messagechat) {
+        val selectedMessage = messagelist.message
+        println("message $selectedMessage")
+
+        val popupMenu = PopupMenu(this, findViewById<TextView>(R.id.tvreceivemessage))
+        popupMenu.setForceShowIcon(true)
+
+        popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
+
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.Reply -> {
+                    true
+                }
+                R.id.Forward -> {
+
+                    true
+                }
+                R.id.Copy -> {
+                    val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    val clipData = ClipData.newPlainText("Message", selectedMessage)
+                    clipboardManager.setPrimaryClip(clipData)
+
+                    true
+                }
+                R.id.Delete -> {
+                    val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+                    val messageRef: DatabaseReference = database.getReference("Chats")
+                        .child(receiverRoom!!)
+                        .child("messages")
+                        .child(messagelist.key)
+
+                    messageRef.removeValue()
+                        .addOnSuccessListener {
+                            println("Message deleted successfully")
+                            //Removing message from local list
+                            messageList.remove(messagelist)
+                            messageAdapter.notifyDataSetChanged()
+                        }
+                        .addOnFailureListener { exception ->
+                            println("Failed to delete message: ${exception.message}")
+                        }
+
+                    true
+                }
+                else -> false
+            }
+        }
+
+        popupMenu.show()
     }
 
 
