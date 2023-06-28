@@ -1,7 +1,6 @@
 package com.example.afinal
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -9,19 +8,17 @@ import android.util.Patterns
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.afinal.Model.User
+import com.example.afinal.utils.HelperMethods
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
-import com.makeramen.roundedimageview.RoundedImageView
-import de.hdodenhof.circleimageview.CircleImageView
 
 
 class RegistrationActivity : AppCompatActivity() {
@@ -68,7 +65,7 @@ class RegistrationActivity : AppCompatActivity() {
 
 
         btnReg.setOnClickListener {
-            if (InternetConnection.isNetworkAvailable(this@RegistrationActivity)) {
+            if (HelperMethods.isNetworkAvailable(this@RegistrationActivity)) {
                 val name = username.text.toString()
                 val email = emailreg.text.toString()
                 val password = etPass.text.toString()
