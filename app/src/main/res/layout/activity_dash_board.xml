@@ -4,12 +4,13 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FBFBFB"
+        android:background = "@drawable/spark"
         tools:context=".DashBoardActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userRecyclerview"
         android:layout_width="match_parent"
+        android:backgroundTint="@color/cardcolor"
         android:layout_marginTop="@dimen/_8sdp"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

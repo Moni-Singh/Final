@@ -31,7 +31,7 @@
             android:visibility="visible"
             android:paddingTop="@dimen/_2sdp"
             android:paddingBottom="@dimen/_10sdp"
-            android:textColor="@color/white"
+            android:textColor="@color/blackgrey"
             android:textSize="@dimen/_16sdp" />
 
         <TextView
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_5sdp"
             android:layout_gravity="end|bottom"
-            android:textColor="@color/white"
+            android:textColor="@color/blackgrey"
             android:textSize="@dimen/_8sdp"
             android:text="Time" />
     </com.google.android.material.card.MaterialCardView>

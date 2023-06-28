@@ -7,6 +7,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -53,13 +54,17 @@ class ChatActivity : AppCompatActivity(),MessageAdapter.OnClickSelectMessage {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
+
+
         supportActionBar!!.setBackgroundDrawable(
-            ColorDrawable(
-                ContextCompat.getColor(this, R.color.chatcolor))
+            ContextCompat.getDrawable(this, R.drawable.spark)
         )
+
         val window = this.window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = ContextCompat.getColor(this, R.color.chatcolor)
+        window.setBackgroundDrawableResource(R.drawable.spark)
+
+
         val name = intent.getStringExtra("name")
         val image = intent.getStringExtra("image")
         val receiveruid = intent.getStringExtra("uid")
@@ -176,11 +181,10 @@ class ChatActivity : AppCompatActivity(),MessageAdapter.OnClickSelectMessage {
         })
     }
 //for message current time
-    private fun getCurrentTime(): String? {
-      HelperMethods.currentTime(this)
-        return getCurrentTime()
+private fun getCurrentTime(): String {
+    return HelperMethods.currentTime(this)
+}
 
-    }
 
     private fun scrollToLastItem() {
         val lastItemPosition = messageList.size - 1

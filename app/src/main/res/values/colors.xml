@@ -8,8 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="chatcolor">#4C317B</color>
-    <color name="chatsendmessage">#C0C0C1</color>
-    <color name="chatreceivemessage">#7552B3</color>
+    <color name="chatsendmessage">#F7F6F8</color>
+    <color name="chatreceivemessage">#A5ACCD</color>
     <color name="blackgrey">#01111e</color>
+    <color name="cardcolor">#dce3e9</color>
     <color name="colorTransparent">#00000000</color>
 </resources>

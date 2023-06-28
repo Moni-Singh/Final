@@ -61,13 +61,13 @@ class DashBoardActivity : AppCompatActivity() {
         supportActionBar?.title = "Chat Application"
 
         supportActionBar!!.setBackgroundDrawable(
-            ColorDrawable(
-                ContextCompat.getColor(this, R.color.chatcolor)))
-
-
+            ContextCompat.getDrawable(this, R.drawable.spark)
+        )
         val window = this.window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = ContextCompat.getColor(this, R.color.chatcolor)
+        window.setBackgroundDrawableResource(R.drawable.spark)
+
+
         IntentFilter (Intent.ACTION_AIRPLANE_MODE_CHANGED).also {
             registerReceiver(receiver, it)
 
