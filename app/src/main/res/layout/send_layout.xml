@@ -16,7 +16,11 @@
         android:background="@drawable/usersendmessage"
         android:layout_marginEnd="@dimen/_8sdp"
         app:cardCornerRadius="@dimen/_8sdp">
-
+        <ImageView
+            android:id="@+id/ivSelectedSendImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
         <TextView
             android:id="@+id/tvsendmessage"
             android:layout_width="wrap_content"
@@ -24,9 +28,22 @@
             android:paddingLeft="@dimen/_10sdp"
             android:paddingRight="@dimen/_10sdp"
             android:text="This is moni"
+            android:visibility="visible"
             android:paddingTop="@dimen/_2sdp"
-            android:paddingBottom="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_10sdp"
             android:textColor="@color/white"
             android:textSize="@dimen/_16sdp" />
+
+        <TextView
+            android:id="@+id/tvSendChatTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_gravity="end|bottom"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_8sdp"
+            android:text="Time" />
     </com.google.android.material.card.MaterialCardView>
+
+
 </RelativeLayout>

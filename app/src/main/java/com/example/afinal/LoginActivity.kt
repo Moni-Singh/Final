@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.afinal.utils.HelperMethods
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -96,7 +97,7 @@ class LoginActivity : AppCompatActivity() {
         progressDialog.show()
 
 
-        if (InternetConnection.isNetworkAvailable(this@LoginActivity)) {
+        if (HelperMethods.isNetworkAvailable(this@LoginActivity)) {
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) {
                 if (it.isSuccessful) {
 

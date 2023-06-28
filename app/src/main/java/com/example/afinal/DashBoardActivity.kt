@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Dialog
 import android.app.SearchManager
 import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentFilter
@@ -12,7 +11,6 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -25,12 +23,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.afinal.Model.User
 import com.example.afinal.adapter.UserAdapter
+import com.example.afinal.utils.HelperMethods
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
@@ -172,29 +170,7 @@ class DashBoardActivity : AppCompatActivity() {
             cancelButton = dialog.findViewById(R.id.cancelButton)
             val progressBar = dialog.findViewById<ProgressBar>(R.id.progress)
             cardviewDailog.setOnClickListener{
-
-
-                val options =
-                    arrayOf<CharSequence>("Take Photo", "Choose photo from Gallery", "Cancel")
-                val builder = AlertDialog.Builder(this@DashBoardActivity)
-                builder.setTitle("Choose an option")
-                builder.setItems(options) { dialog, item ->
-                    when (item) {
-                        0 -> {
-                            val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                            startActivityForResult(takePicture, 0)
-                        }
-                        1 -> {
-                            val pickPhoto = Intent(
-                                Intent.ACTION_PICK,
-                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                            )
-                            startActivityForResult(pickPhoto, 1)
-                        }
-                        2 -> dialog.dismiss()
-                    }
-                }
-                builder.show()
+                HelperMethods.showOptions(this)
             }
 
             cancelButton!!.setOnClickListener {

@@ -35,7 +35,7 @@
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/coco"
+            android:src="@drawable/ic_person_24"
             app:civ_border_color="#FF000000"
             app:civ_border_width="1dp" />
 
@@ -61,16 +61,7 @@
         app:layout_constraintStart_toEndOf="@id/userImageCv"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/deleteIv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:visibility="gone"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
-        android:background="@drawable/ic_baseline_delete_24" />
+
 
 </RelativeLayout>
 
