@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.Patterns
 import android.view.WindowManager
 import android.widget.Button
@@ -18,7 +21,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.collection.LLRBNode.Color
 import com.google.firebase.ktx.Firebase
 
 
@@ -38,9 +40,14 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
-        supportActionBar?.setDisplayShowTitleEnabled(true)
-        supportActionBar?.title = "Registration"
-
+        supportActionBar?.apply {
+            setDisplayShowTitleEnabled(true)
+            title = "Registration"
+            val titleColor = android.graphics.Color.WHITE
+            val text = SpannableString(title)
+            text.setSpan(ForegroundColorSpan(titleColor), 0, text.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+            setTitle(text)
+        }
 
 
 

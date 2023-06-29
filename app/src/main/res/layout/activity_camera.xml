@@ -16,7 +16,7 @@
         android:background="@drawable/capture_button"
         android:elevation="2dp"
         android:scaleType="fitCenter"
-        android:text=""
+        android:text="capture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintLeft_toLeftOf="parent"

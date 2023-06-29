@@ -74,10 +74,12 @@ class ChatActivity : AppCompatActivity(),MessageAdapter.OnClickSelectMessage {
         receiverRoom = senderuid + receiveruid
         supportActionBar?.title = name
 
+
         val actionBar = supportActionBar
         actionBar?.setDisplayShowCustomEnabled(true)
         actionBar?.setDisplayShowTitleEnabled(false)
         val inflater = LayoutInflater.from(this)
+
         val actionBarLayout = inflater.inflate(R.layout.actionbar_image, null)
         actionBar?.customView = actionBarLayout
 
@@ -109,6 +111,7 @@ class ChatActivity : AppCompatActivity(),MessageAdapter.OnClickSelectMessage {
 
         //adding data to recycleview
         mDbRef = FirebaseDatabase.getInstance().reference
+
         mDbRef.child("Chats").child(senderRoom!!).child("messages")
             .addValueEventListener(object : ValueEventListener {
 
@@ -195,6 +198,7 @@ private fun getCurrentTime(): String {
     override fun selectSendmessage(messagelist: Messagechat) {
 
         val selectedMessage = messagelist.message
+        val sendImage = messagelist.images
         println("message $selectedMessage")
 
         val popupMenu = PopupMenu(this, findViewById<TextView>(R.id.tvsendmessage))
@@ -243,25 +247,11 @@ private fun getCurrentTime(): String {
 
         popupMenu.show()
     }
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK) {
-            when (requestCode) {
-                0 -> {
-                    // Handle image capture from camera (if required)
-                }
-                1 -> {
-                    // Handle image selection from gallery
-                    val imageUri: Uri? = data?.data
-                    if (imageUri != null) {
-                        selectedImages.add(imageUri)
+    fun sendImage (){
 
-                     messageRecyclerView.adapter?.notifyDataSetChanged()
-                    }
-                }
-            }
-        }
+
+
     }
 
 }

@@ -28,14 +28,14 @@ class MessageAdapter(val context: Context, val messageList: ArrayList<Messagecha
     class SentViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview) {
         val message = itemview.findViewById<TextView>(R.id.tvsendmessage)
         val sendMessageTime = itemview.findViewById<TextView>(R.id.tvSendChatTime)
-//        val selectedSendImage = itemview.findViewById<ImageView>(R.id.ivSelectedSendImage)
+        val selectedSendImage = itemview.findViewById<ImageView>(R.id.ivSelectedSendImage)
 
     }
 
     class ReceiveViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview) {
         val message = itemview.findViewById<TextView>(R.id.tvreceivemessage)
         val receiveMessageTime = itemview.findViewById<TextView>(R.id.tvReceiveChatTime)
-//        val selectedReceiveImage = itemview.findViewById<ImageView>(R.id.ivSelectedReciveImage)
+        val selectedReceiveImage = itemview.findViewById<ImageView>(R.id.ivSelectedReciveImage)
 
     }
 
@@ -55,38 +55,40 @@ class MessageAdapter(val context: Context, val messageList: ArrayList<Messagecha
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val currentMessage = messageList[position]
 
-        if (holder.javaClass == SentViewHolder::class.java) {
-            var viewHolder = holder as SentViewHolder
+        if (holder is SentViewHolder) {
+            val viewHolder = holder
             viewHolder.message.text = currentMessage.message
             viewHolder.sendMessageTime.text = currentMessage.currentTime
-           if(!currentMessage.image.isNullOrEmpty()){
-//               Picasso.get().load(currentMessage.image).into(holder.selectedSendImage)
-           }else {
-               Log.d("UserAdapter", "Image URL: ${currentMessage.image}")
-           }
-            holder.message.setOnClickListener {
 
-                listener.selectSendmessage(currentMessage)
-
+            if (!currentMessage.images.isNullOrEmpty()) {
+                // Load and display the image using Picasso or any other image loading library
+                Picasso.get().load(currentMessage.images).into(viewHolder.selectedSendImage)
+                Log.d("ChatAdapter", "Image sURL: ${currentMessage.images}")
             }
 
-        } else {
-            var viewHolder = holder as ReceiveViewHolder
+            viewHolder.message.setOnClickListener {
+                listener.selectSendmessage(currentMessage)
+            }
+
+        } else if (holder is ReceiveViewHolder) {
+            val viewHolder = holder
             viewHolder.message.text = currentMessage.message
             viewHolder.receiveMessageTime.text = currentMessage.currentTime
-            viewHolder.receiveMessageTime.text = currentMessage.currentTime
-             if (!currentMessage.image.isNullOrEmpty()) {
-//                Picasso.get().load(currentMessage.image).into(holder.selectedReceiveImage)
-            } else {
-                Log.d("UserAdapter", "Image URL: ${currentMessage.image}")
+
+            if (!currentMessage.images.isNullOrEmpty()) {
+                // Load and display the image using Picasso or any other image loading library
+                Picasso.get().load(currentMessage.images).into(viewHolder.selectedReceiveImage)
+                Log.d("ChatAdapter", "Image URL: ${currentMessage.images}")
             }
 
-            holder.message.setOnClickListener {
+
+
+            viewHolder.message.setOnClickListener {
                 listener.selectSendmessage(currentMessage)
             }
-
         }
     }
+
 
     override fun getItemViewType(position: Int): Int {
         val currentmesage = messageList[position]

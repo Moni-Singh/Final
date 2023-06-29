@@ -5,16 +5,16 @@ class Messagechat {
     var message:String? =  null
     var senderId:String? = null
     var currentTime:String?= null
-    var image:String? = null
+    var images:String? = null
     var key: String = ""
 
     constructor(){}
 
-    constructor(message:String?,senderId:String?,currentTime:String?,image:String?){
+    constructor(message:String?,senderId:String?,currentTime:String?,images:String?){
        this.message = message
        this.senderId = senderId
        this.currentTime = currentTime
-        this.image = image
+        this.images = images
 
     }
 

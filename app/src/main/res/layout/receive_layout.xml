@@ -7,6 +7,38 @@
     android:gravity="start"
     android:paddingBottom="@dimen/_10sdp">
 
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="90dp"
+        android:visibility="visible"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+            android:id="@+id/ivSelectedReciveImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/cat" />
+    </androidx.cardview.widget.CardView>
+<!--    <ImageView-->
+<!--        android:id="@+id/ivSelectedReciveImage"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content" />-->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView1"
         android:layout_width="wrap_content"
@@ -15,10 +47,7 @@
         app:cardBackgroundColor="@color/chatsendmessage"
         app:cardCornerRadius="@dimen/_8sdp">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/ivSelectedReciveImage"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content" />-->
+
 
         <LinearLayout
             android:layout_width="match_parent"
