@@ -31,12 +31,12 @@ class LoginActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayShowTitleEnabled(true)
         supportActionBar?.title = "Login"
-
+      if(supportActionBar!=null){
         supportActionBar!!.setBackgroundDrawable(
             ColorDrawable(
-                ContextCompat.getColor(this, R.color.chatcolor)
+                ContextCompat.getColor(this, R.color.cardcolor)
             )
-        )
+        )}
         email = findViewById(R.id.loginEmail)
         password = findViewById(R.id.loginPassword)
         val window = this.window

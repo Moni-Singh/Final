@@ -6,7 +6,7 @@
     android:layout_marginTop="@dimen/_4sdp"
     android:gravity="end"
     android:layout_marginStart="@dimen/_50sdp"
-     android:paddingBottom="@dimen/_10sdp"
+    android:paddingBottom="@dimen/_10sdp"
     android:layout_gravity="end">
 
     <com.google.android.material.card.MaterialCardView
@@ -16,34 +16,40 @@
         android:background="@drawable/usersendmessage"
         android:layout_marginEnd="@dimen/_8sdp"
         app:cardCornerRadius="@dimen/_8sdp">
-        <ImageView
-            android:id="@+id/ivSelectedSendImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-        <TextView
-            android:id="@+id/tvsendmessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/_10sdp"
-            android:paddingRight="@dimen/_10sdp"
-            android:text="This is moni"
-            android:visibility="visible"
-            android:paddingTop="@dimen/_2sdp"
-            android:paddingBottom="@dimen/_10sdp"
-            android:textColor="@color/blackgrey"
-            android:textSize="@dimen/_16sdp" />
 
-        <TextView
-            android:id="@+id/tvSendChatTime"
+<!--        <ImageView-->
+<!--            android:id="@+id/ivSelectedSendImage"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:visibility="gone" />-->
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_gravity="end|bottom"
-            android:textColor="@color/blackgrey"
-            android:textSize="@dimen/_8sdp"
-            android:text="Time" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvsendmessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:text="This is moni"
+                android:visibility="visible"
+                android:paddingTop="@dimen/_2sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:textColor="@color/blackgrey"
+                android:textSize="@dimen/_16sdp" />
+
+            <TextView
+                android:id="@+id/tvSendChatTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:text="Time"
+                android:textColor="@color/blackgrey"
+                android:textSize="@dimen/_8sdp" />
+        </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
-
 </RelativeLayout>

@@ -28,14 +28,14 @@ class MessageAdapter(val context: Context, val messageList: ArrayList<Messagecha
     class SentViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview) {
         val message = itemview.findViewById<TextView>(R.id.tvsendmessage)
         val sendMessageTime = itemview.findViewById<TextView>(R.id.tvSendChatTime)
-        val selectedSendImage = itemview.findViewById<ImageView>(R.id.ivSelectedSendImage)
+//        val selectedSendImage = itemview.findViewById<ImageView>(R.id.ivSelectedSendImage)
 
     }
 
     class ReceiveViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview) {
         val message = itemview.findViewById<TextView>(R.id.tvreceivemessage)
         val receiveMessageTime = itemview.findViewById<TextView>(R.id.tvReceiveChatTime)
-        val selectedReceiveImage = itemview.findViewById<ImageView>(R.id.ivSelectedReciveImage)
+//        val selectedReceiveImage = itemview.findViewById<ImageView>(R.id.ivSelectedReciveImage)
 
     }
 
@@ -60,7 +60,7 @@ class MessageAdapter(val context: Context, val messageList: ArrayList<Messagecha
             viewHolder.message.text = currentMessage.message
             viewHolder.sendMessageTime.text = currentMessage.currentTime
            if(!currentMessage.image.isNullOrEmpty()){
-               Picasso.get().load(currentMessage.image).into(holder.selectedSendImage)
+//               Picasso.get().load(currentMessage.image).into(holder.selectedSendImage)
            }else {
                Log.d("UserAdapter", "Image URL: ${currentMessage.image}")
            }
@@ -76,7 +76,7 @@ class MessageAdapter(val context: Context, val messageList: ArrayList<Messagecha
             viewHolder.receiveMessageTime.text = currentMessage.currentTime
             viewHolder.receiveMessageTime.text = currentMessage.currentTime
              if (!currentMessage.image.isNullOrEmpty()) {
-                Picasso.get().load(currentMessage.image).into(holder.selectedReceiveImage)
+//                Picasso.get().load(currentMessage.image).into(holder.selectedReceiveImage)
             } else {
                 Log.d("UserAdapter", "Image URL: ${currentMessage.image}")
             }

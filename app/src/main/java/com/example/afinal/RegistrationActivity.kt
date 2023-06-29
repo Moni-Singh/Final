@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.collection.LLRBNode.Color
 import com.google.firebase.ktx.Firebase
 
 
@@ -41,12 +42,15 @@ class RegistrationActivity : AppCompatActivity() {
         supportActionBar?.title = "Registration"
 
 
+
+
+
         val window = this.window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = ContextCompat.getColor(this, R.color.chatcolor)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.cardcolor)
         supportActionBar!!.setBackgroundDrawable(
             ColorDrawable(
-                ContextCompat.getColor(this, R.color.chatcolor))
+                ContextCompat.getColor(this, R.color.cardcolor))
         )
 
         auth = Firebase.auth
