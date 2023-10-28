@@ -1,5 +1,6 @@
 package com.example.afinal
 
+import android.Manifest
 import android.app.Activity
 import android.app.Dialog
 import android.app.SearchManager
@@ -7,9 +8,9 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -23,6 +24,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,11 +32,14 @@ import com.example.afinal.Model.User
 import com.example.afinal.adapter.UserAdapter
 import com.example.afinal.utils.HelperMethods
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.ByteArrayOutputStream
-import java.util.*
 
 
 class DashBoardActivity : AppCompatActivity() {
@@ -49,9 +54,12 @@ class DashBoardActivity : AppCompatActivity() {
     lateinit var receiver :AirPlaneModeChangeReceiver
     private lateinit var mDbRef:DatabaseReference
 
-
-
-
+    var permissions = arrayOf<String>(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.CAMERA,
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+        Manifest.permission.ACCESS_FINE_LOCATION
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash_board)
@@ -70,15 +78,13 @@ class DashBoardActivity : AppCompatActivity() {
 
         IntentFilter (Intent.ACTION_AIRPLANE_MODE_CHANGED).also {
             registerReceiver(receiver, it)
-
-
-
         }
 
 // In onCreate or initialization
         storageRef = FirebaseStorage.getInstance().reference
         mAuth = FirebaseAuth.getInstance()
-        mDbRef =FirebaseDatabase.getInstance().getReference()
+        mDbRef = FirebaseDatabase.getInstance().getReference()
+        mDbRef.push().child("User")
 
         userlist = ArrayList()
         userAdapter = UserAdapter(this)
@@ -90,8 +96,6 @@ class DashBoardActivity : AppCompatActivity() {
 
         mDbRef.child("User").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-
-
                 for(postSnapshot in snapshot.children){
                     val currentUser = postSnapshot.getValue(User::class.java)
                     //for hiding the current logign user
@@ -101,10 +105,29 @@ class DashBoardActivity : AppCompatActivity() {
                 }
             }
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
         })
+        checkPermissions()
+    }
 
+    private fun checkPermissions(): Boolean {
+        var result: Int
+        val listPermissionsNeeded: MutableList<String> = ArrayList()
+        for (p in permissions) {
+            result = ContextCompat.checkSelfPermission(baseContext, p)
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                listPermissionsNeeded.add(p)
+            }
+        }
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(
+                this,
+                listPermissionsNeeded.toTypedArray<String>(),
+                110
+            )
+            return false
+        }
+        return true
     }
 
 
@@ -316,10 +339,6 @@ class DashBoardActivity : AppCompatActivity() {
             }
         }
     }
-
-
-
-
 }
 
 

@@ -132,8 +132,6 @@ class RegistrationActivity : AppCompatActivity() {
         private fun addUserToDatabase(name: String, email: String, image: String, uid: String) {
             mDBRef = FirebaseDatabase.getInstance().getReference()
             mDBRef.child("User").child(uid).setValue(User(name, email, uid, image))
-
-
         }
 
     }
